@@ -10,3 +10,15 @@ pushReplacementTo(BuildContext context, Widget newScreen) {
     MaterialPageRoute(builder: (context) => newScreen),
   );
 }
+
+pushAndRemoveUntil(BuildContext context, Widget newScreen) {
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => newScreen),
+    (route) => false,
+  );
+}
+
+pop(BuildContext context) {
+  Navigator.pop(context);
+}

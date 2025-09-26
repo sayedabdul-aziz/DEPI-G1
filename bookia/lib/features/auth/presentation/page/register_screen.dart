@@ -9,36 +9,35 @@ import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/password_text_form_field.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
-import 'package:bookia/features/auth/presentation/page/register_screen.dart';
-import 'package:bookia/features/auth/presentation/widgets/social_login.dart';
+import 'package:bookia/features/auth/presentation/page/login_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWithBack(),
-      body: loginBody(),
+      body: registerBody(),
       bottomNavigationBar: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Don\'t have an account? ', style: TextStyles.styleSize15),
+            Text('Already have an account? ', style: TextStyles.styleSize15),
             TextButton(
               onPressed: () {
-                pushReplacementTo(context, const RegisterScreen());
+                pushReplacementTo(context, const LoginScreen());
               },
-              child: Text('Register', style: TextStyles.styleSize15),
+              child: Text('Login', style: TextStyles.styleSize15),
             ),
           ],
         ),
@@ -46,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget loginBody() {
+  Widget registerBody() {
     var cubit = context.read<AuthCubit>();
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
@@ -66,11 +65,25 @@ class _LoginScreenState extends State<LoginScreen> {
             key: cubit.formKey,
             child: Column(
               children: [
-                Text(AppStrings.welcomeBack, style: TextStyles.styleSize30),
+                Text(
+                  AppStrings.registerToGetStarted,
+                  style: TextStyles.styleSize30,
+                ),
                 const Gap(32),
                 CustomTextFormField(
+                  controller: cubit.nameController,
+                  hintText: AppStrings.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  },
+                ),
+                const Gap(15),
+                CustomTextFormField(
                   controller: cubit.emailController,
-                  hintText: AppStrings.emailHint,
+                  hintText: AppStrings.email,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
@@ -81,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Gap(15),
                 PasswordTextFormField(
                   controller: cubit.passwordController,
-                  hintText: AppStrings.passwordHint,
+                  hintText: AppStrings.password,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
@@ -89,27 +102,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      AppStrings.forgotPassword,
-                      style: TextStyles.styleSize15,
-                    ),
-                  ),
+                const Gap(15),
+                PasswordTextFormField(
+                  controller: cubit.passwordConfirmationController,
+                  hintText: AppStrings.password,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
                 ),
-                Gap(20),
+
+                Gap(30),
                 MainButton(
-                  label: 'Login',
+                  label: 'Register',
                   onPressed: () {
                     if (cubit.formKey.currentState!.validate()) {
-                      cubit.login();
+                      cubit.register();
                     }
                   },
                 ),
-                Gap(20),
-                SocialLogin(),
               ],
             ),
           ),
