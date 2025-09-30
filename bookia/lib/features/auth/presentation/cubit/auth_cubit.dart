@@ -25,7 +25,6 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
     if (res != null) {
-      clearAllFields();
       emit(AuthSuccessState());
     } else {
       emit(AuthFailureState('Registration failed'));
@@ -41,17 +40,9 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
     if (res != null) {
-      clearAllFields();
       emit(AuthSuccessState());
     } else {
       emit(AuthFailureState('Registration failed'));
     }
-  }
-
-  clearAllFields() {
-    nameController.clear();
-    emailController.clear();
-    passwordController.clear();
-    passwordConfirmationController.clear();
   }
 }

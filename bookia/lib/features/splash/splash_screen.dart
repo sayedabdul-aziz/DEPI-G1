@@ -1,8 +1,8 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/constants/app_strings.dart';
 import 'package:bookia/core/routes/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/utils/text_styles.dart';
-import 'package:bookia/features/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2), () {
-      pushReplacementTo(context, const WelcomeScreen());
+      pushReplacementTo(context, Routes.welcome);
     });
     super.initState();
   }

@@ -1,11 +1,10 @@
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/constants/app_strings.dart';
 import 'package:bookia/core/routes/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:bookia/core/widgets/main_button.dart';
-import 'package:bookia/features/auth/presentation/page/login_screen.dart';
-import 'package:bookia/features/auth/presentation/page/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -42,17 +41,17 @@ class WelcomeScreen extends StatelessWidget {
                 MainButton(
                   label: AppStrings.login,
                   onPressed: () {
-                    pushTo(context, LoginScreen());
+                    pushTo(context, Routes.login);
                   },
                 ),
-                Gap(15),
+                const Gap(15),
                 MainButton(
                   label: AppStrings.register,
                   bgColor: AppColors.backgroundColor,
                   textColor: AppColors.darkColor,
                   borderColor: AppColors.darkColor,
                   onPressed: () {
-                    pushTo(context, RegisterScreen());
+                    pushTo(context, Routes.register);
                   },
                 ),
                 Spacer(),

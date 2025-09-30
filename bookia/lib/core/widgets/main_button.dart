@@ -10,6 +10,8 @@ class MainButton extends StatelessWidget {
     this.bgColor = AppColors.primaryColor,
     this.textColor = AppColors.backgroundColor,
     this.borderColor,
+    this.height = 55,
+    this.width = double.infinity,
   });
 
   final String label;
@@ -17,12 +19,14 @@ class MainButton extends StatelessWidget {
   final Color bgColor;
   final Color textColor;
   final Color? borderColor;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
-      height: 55,
+      width: width,
+      height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: bgColor,

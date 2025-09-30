@@ -1,6 +1,7 @@
 import 'package:bookia/core/constants/app_constants.dart';
 import 'package:bookia/core/constants/app_strings.dart';
 import 'package:bookia/core/routes/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/utils/text_styles.dart';
 import 'package:bookia/core/widgets/app_bar_with_back.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
@@ -9,8 +10,6 @@ import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/password_text_form_field.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
-import 'package:bookia/features/auth/presentation/page/login_screen.dart';
-import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -35,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Text('Already have an account? ', style: TextStyles.styleSize15),
             TextButton(
               onPressed: () {
-                pushReplacementTo(context, const LoginScreen());
+                pushReplacementTo(context, Routes.login);
               },
               child: Text('Login', style: TextStyles.styleSize15),
             ),
@@ -50,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          pushAndRemoveUntil(context, MainAppScreen());
+          pushAndRemoveUntil(context, Routes.main);
         } else if (state is AuthFailureState) {
           pop(context);
           showErrorDialog(context, state.error);
