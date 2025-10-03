@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MainAppScreen extends StatefulWidget {
-  const MainAppScreen({super.key, required this.email});
-  final String email;
+  const MainAppScreen({super.key});
 
   @override
   State<MainAppScreen> createState() => _MainAppScreenState();
@@ -14,7 +13,7 @@ class MainAppScreen extends StatefulWidget {
 
 class _MainAppScreenState extends State<MainAppScreen> {
   int selectedIndex = 0;
-  List<Widget> pages = [HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen()];
+  List<Widget> pages = [HomeScreen(), Container(), Container(), Container()];
 
   @override
   Widget build(BuildContext context) {

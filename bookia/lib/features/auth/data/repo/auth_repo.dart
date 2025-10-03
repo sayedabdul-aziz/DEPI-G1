@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'package:bookia/core/services/api_endpoints.dart';
-import 'package:bookia/core/services/dio_provider.dart';
+import 'package:bookia/core/services/api/api_endpoints.dart';
+import 'package:bookia/core/services/api/dio_provider.dart';
+import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/features/auth/data/models/auth_params.dart';
 import 'package:bookia/features/auth/data/models/auth_response/auth_response.dart';
 
@@ -16,7 +17,11 @@ class AuthRepo {
         data: params.toJson(),
       );
       if (res.statusCode == 201) {
-        return AuthResponse.fromJson(res.data);
+        var object = AuthResponse.fromJson(res.data);
+        SharedPref.setUserData(object.data?.user);
+        SharedPref.setToken(object.data?.token);
+
+        return object;
       } else {
         return null;
       }
@@ -33,7 +38,11 @@ class AuthRepo {
         data: params.toJson(),
       );
       if (res.statusCode == 200) {
-        return AuthResponse.fromJson(res.data);
+        var object = AuthResponse.fromJson(res.data);
+        SharedPref.setUserData(object.data?.user);
+        SharedPref.setToken(object.data?.token);
+
+        return object;
       } else {
         return null;
       }
@@ -42,7 +51,10 @@ class AuthRepo {
       return null;
     }
   }
-    static Future<bool> sendForgetPasswordLink({required AuthParams params}) async {
+
+  static Future<bool> sendForgetPasswordLink({
+    required AuthParams params,
+  }) async {
     try {
       var res = await DioProvider.post(
         endpoint: ApiEndpoints.login,

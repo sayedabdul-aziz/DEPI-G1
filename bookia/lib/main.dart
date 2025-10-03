@@ -1,5 +1,6 @@
 import 'package:bookia/core/routes/routes.dart';
-import 'package:bookia/core/services/dio_provider.dart';
+import 'package:bookia/core/services/api/dio_provider.dart';
+import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/app_fonts.dart';
 import 'package:bookia/core/utils/text_styles.dart';
@@ -11,8 +12,11 @@ import 'package:flutter/material.dart';
 // Response(Status, Body)
 // http, dio
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   DioProvider.init();
+  await SharedPref.init();
   runApp(const MainApp());
 }
 
@@ -28,7 +32,10 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: AppFonts.dmSerifDisplayFamily,
         scaffoldBackgroundColor: AppColors.backgroundColor,
-        appBarTheme: AppBarTheme(backgroundColor: AppColors.backgroundColor),
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.backgroundColor,
+          surfaceTintColor: Colors.transparent,
+        ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primaryColor,
           onSurface: AppColors.darkColor,
