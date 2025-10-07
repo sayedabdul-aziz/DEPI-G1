@@ -2,6 +2,7 @@ import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/page/login_screen.dart';
 import 'package:bookia/features/auth/presentation/page/register_screen.dart';
 import 'package:bookia/features/home/data/models/best_seller_response/product.dart';
+import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/page/details_screen.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/splash/splash_screen.dart';
@@ -45,7 +46,10 @@ class Routes {
       GoRoute(
         path: details,
         builder: (context, state) {
-          return DetailsScreen(product: state.extra as Product);
+          return BlocProvider(
+            create: (context) => HomeCubit(),
+            child: DetailsScreen(product: state.extra as Product),
+          );
         },
       ),
     ],

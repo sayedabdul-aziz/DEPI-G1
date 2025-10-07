@@ -14,4 +14,5 @@ class AppImages {
   static const String profileSvg = 'assets/icons/Profile.svg';
   static const String homeSvg = 'assets/icons/Home.svg';
   static const String searchSvg = 'assets/icons/search-normal.svg';
+  static const String loadingLottie = 'assets/images/loading.json';
 }

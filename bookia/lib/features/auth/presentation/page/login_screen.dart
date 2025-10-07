@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         } else if (state is AuthFailureState) {
           pop(context);
-          showErrorDialog(context, state.error);
+          showMyDialog(context, state.error);
         } else if (state is AuthLoadingState) {
           showLoadingDialog(context);
         }
