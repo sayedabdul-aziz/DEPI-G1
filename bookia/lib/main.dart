@@ -33,6 +33,7 @@ class MainApp extends StatelessWidget {
         fontFamily: AppFonts.dmSerifDisplayFamily,
         scaffoldBackgroundColor: AppColors.backgroundColor,
         appBarTheme: AppBarTheme(
+          centerTitle: true,
           backgroundColor: AppColors.backgroundColor,
           surfaceTintColor: Colors.transparent,
         ),

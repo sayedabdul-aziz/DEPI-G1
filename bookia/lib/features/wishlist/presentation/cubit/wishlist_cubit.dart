@@ -19,6 +19,7 @@ class WishlistCubit extends Cubit<WishlistState> {
 
     if (res != null) {
       books = res.data?.data ?? [];
+      //
       emit(WishlistSuccessState());
     } else {
       emit(WishlistErrorState());

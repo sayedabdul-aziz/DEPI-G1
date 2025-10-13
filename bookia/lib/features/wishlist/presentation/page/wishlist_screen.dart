@@ -42,6 +42,9 @@ class WishlistScreen extends StatelessWidget {
                           productId: cubit.books[index].id ?? 0,
                         );
                       },
+                      onRefresh: () {
+                        cubit.getWishlist();
+                      },
                     );
                   },
                 ),

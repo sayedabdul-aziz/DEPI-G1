@@ -50,11 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          pushAndRemoveUntil(
-            context,
-            Routes.main,
-            extra: cubit.emailController.text,
-          );
+          pushToBase(context, Routes.main, extra: cubit.emailController.text);
         } else if (state is AuthFailureState) {
           pop(context);
           showMyDialog(context, state.error);

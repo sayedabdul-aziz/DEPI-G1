@@ -41,7 +41,7 @@ class DetailsScreen extends StatelessWidget {
           appBar: AppBarWithBack(
             action: IconButton(
               onPressed: () {
-                if (cubit.isWishlist(product.id ?? 0)) {
+                if ((cubit.isWishlist(product.id ?? 0))) {
                   cubit.removeFromWishlist(productId: product.id ?? 0);
                 } else {
                   cubit.addToWishlist(productId: product.id ?? 0);
@@ -50,7 +50,7 @@ class DetailsScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 AppImages.bookmarkSvg,
                 colorFilter: ColorFilter.mode(
-                  cubit.isWishlist(product.id ?? 0)
+                  (cubit.isWishlist(product.id ?? 0))
                       ? AppColors.primaryColor
                       : AppColors.darkColor,
                   BlendMode.srcIn,
@@ -59,13 +59,13 @@ class DetailsScreen extends StatelessWidget {
             ),
           ),
           body: detailsBody(),
-          bottomNavigationBar: bottomActions(),
+          bottomNavigationBar: bottomActions(context),
         );
       },
     );
   }
 
-  SafeArea bottomActions() {
+  SafeArea bottomActions(BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -81,7 +81,11 @@ class DetailsScreen extends StatelessWidget {
               child: MainButton(
                 bgColor: AppColors.darkColor,
                 label: 'Add to cart',
-                onPressed: () {},
+                onPressed: () {
+                  context.read<HomeCubit>().addTCart(
+                    productId: product.id ?? 0,
+                  );
+                },
               ),
             ),
           ],

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:bookia/features/auth/data/models/auth_response/user.dart';
-import 'package:bookia/features/wishlist/data/models/wishlist_response/datum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -42,20 +41,25 @@ class SharedPref {
     return object;
   }
 
-  static saveWishlist(List<WishlistProduct>? books) async {
-    if (books == null) return;
-
-    var listOfString = books.map((e) => jsonEncode(e.toJson())).toList();
-    await _pref.setStringList(kWishlist, listOfString);
+  static saveWishlist(List<int> wishlistIds) {
+    // 2,3,4,5,6
+    // List of int =>> list of string
+    List<String> res = [];
+    for (var id in wishlistIds) {
+      res.add(id.toString());
+    }
+    setData(kWishlist, res);
   }
 
-  static List<WishlistProduct>? getWishlist() {
-    var source = _pref.getStringList(kWishlist);
-    if (source == null) return null;
-    var listOfObj = source
-        .map((e) => WishlistProduct.fromJson(jsonDecode(e)))
-        .toList();
-    return listOfObj;
+  static List<int>? getWishlist() {
+    var list = getData(kWishlist);
+    if (list == null) return null;
+
+    List<int> res = [];
+    for (var id in list) {
+      res.add(int.parse(id));
+    }
+    return res;
   }
 
   static setData(String key, dynamic value) {

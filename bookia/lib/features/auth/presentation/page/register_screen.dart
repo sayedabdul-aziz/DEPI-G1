@@ -49,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          pushAndRemoveUntil(context, Routes.main);
+          pushToBase(context, Routes.main);
         } else if (state is AuthFailureState) {
           pop(context);
           showMyDialog(context, state.error);

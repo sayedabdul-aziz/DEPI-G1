@@ -1,4 +1,5 @@
 import 'package:bookia/core/services/local/shared_pref.dart';
+import 'package:bookia/features/cart/data/repo/cart_repo.dart';
 import 'package:bookia/features/home/data/models/best_seller_response/best_seller_response.dart';
 import 'package:bookia/features/home/data/models/best_seller_response/product.dart';
 import 'package:bookia/features/home/data/models/slider_response/slider.dart';
@@ -46,6 +47,17 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  addTCart({required int productId}) async {
+    emit(HomeLoadingState());
+    var res = await CartRepo.addToCart(productId: productId);
+
+    if (res != null) {
+      emit(HomeSuccessState(message: 'Added to cart'));
+    } else {
+      emit(HomeErrorState());
+    }
+  }
+
   addToWishlist({required int productId}) async {
     emit(HomeLoadingState());
     var res = await WishlistRepo.addToWishlist(productId: productId);
@@ -69,8 +81,8 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   bool isWishlist(int productId) {
-    var wishlist = SharedPref.getWishlist();
-
-    return wishlist?.any((e) => e.id == productId) ?? false;
+    var wishlist = SharedPref.getWishlist(); // null, [] , [1,2,3]
+    if (wishlist == null) return false;
+    return wishlist.contains(productId);
   }
 }

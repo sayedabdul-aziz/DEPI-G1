@@ -15,7 +15,7 @@ class WishlistRepo {
 
       if (res.statusCode == 200) {
         var data = WishlistResponse.fromJson(res.data);
-        SharedPref.saveWishlist(data.data?.data);
+        mapToIds(data);
         return data;
       } else {
         return null;
@@ -38,7 +38,7 @@ class WishlistRepo {
 
       if (res.statusCode == 200) {
         var data = WishlistResponse.fromJson(res.data);
-        SharedPref.saveWishlist(data.data?.data);
+        mapToIds(data);
         return data;
       } else {
         return null;
@@ -61,7 +61,7 @@ class WishlistRepo {
 
       if (res.statusCode == 200) {
         var data = WishlistResponse.fromJson(res.data);
-        SharedPref.saveWishlist(data.data?.data);
+        mapToIds(data);
         return data;
       } else {
         return null;
@@ -70,5 +70,14 @@ class WishlistRepo {
       log(e.toString());
       return null;
     }
+  }
+
+  static void mapToIds(WishlistResponse data) {
+    var books = data.data?.data ?? [];
+    List<int> wishlistIds = [];
+    for (var book in books) {
+      wishlistIds.add(book.id ?? 0);
+    }
+    SharedPref.saveWishlist(wishlistIds);
   }
 }

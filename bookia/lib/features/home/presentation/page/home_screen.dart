@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
       create: (context) => HomeCubit()..fetchHomeData(),
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: false,
           title: SvgPicture.asset(AppImages.logoSvg, height: 30),
           actions: [
             IconButton(
