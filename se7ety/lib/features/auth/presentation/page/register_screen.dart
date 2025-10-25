@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -46,7 +44,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             showLoadingDialog(context);
           } else if (state is AuthSuccessState) {
             pop(context);
-            log('succcesss');
+            if (widget.userType == UserTypeEnum.doctor) {
+              pushTo(context, Routes.doctorRegistration);
+            } else {
+              pushWithReplacement(context, Routes.patientMain);
+            }
           } else if (state is AuthErrorState) {
             pop(context);
             showMyDialog(context, state.message);
@@ -113,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   MainButton(
                     onPressed: () async {
                       if (cubit.formKey.currentState!.validate()) {
-                        await cubit.register();
+                        await cubit.register(userType: widget.userType);
                       }
                     },
                     text: "تسجيل حساب جديد",

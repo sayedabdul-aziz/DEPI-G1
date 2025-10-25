@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:se7ety/core/helper/media_query.dart';
 import 'package:se7ety/core/routes/navigations.dart';
 import 'package:se7ety/core/routes/routes.dart';
+import 'package:se7ety/core/services/local/shared_pref.dart';
 import 'package:se7ety/core/utils/app_colors.dart';
 import 'package:se7ety/core/utils/text_styles.dart';
 import 'package:se7ety/core/widgets/main_button.dart';
@@ -24,10 +25,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.whiteColor,
         actions: [
           if (currentIndex != onboardingList.length - 1)
             TextButton(
               onPressed: () {
+                SharedPref.setIsOnBoardingShown(true);
                 pushWithReplacement(context, Routes.welcome);
               },
               child: Text('تخطى', style: TextStyles.body),
@@ -99,6 +102,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       height: 45,
                       text: 'هيا بنا',
                       onPressed: () {
+                        SharedPref.setIsOnBoardingShown(true);
                         pushWithReplacement(context, Routes.welcome);
                       },
                     ),

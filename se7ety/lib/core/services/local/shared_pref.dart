@@ -5,12 +5,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPref {
   static late SharedPreferences _pref;
 
-  static const kUserData = "kUserData";
-  static const kUserToken = "kUserToken";
-  static const kWishlist = "kWishlist";
+  static const konBoarding = "onBoarding";
 
   static init() async {
     _pref = await SharedPreferences.getInstance();
+  }
+
+  static setIsOnBoardingShown(bool value) {
+    setData(konBoarding, value);
+  }
+
+  static bool isOnBoardingShown() {
+    return _pref.getBool(konBoarding) ?? false;
   }
 
   static setData(String key, dynamic value) {
