@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:se7ety/core/utils/app_colors.dart';
 import 'package:se7ety/core/utils/text_styles.dart';
+import 'package:se7ety/features/patient/appointments/my_appointments_screen.dart';
 import 'package:se7ety/features/patient/home/presentation/page/home_screen.dart';
+import 'package:se7ety/features/patient/search/page/search_screen.dart';
 
 class PatientMainAppScreen extends StatefulWidget {
   const PatientMainAppScreen({super.key});
@@ -15,15 +17,15 @@ class _MainPageState extends State<PatientMainAppScreen> {
   int _selectedIndex = 0;
   final List _pages = [
     const PatientHomeScreen(),
-    // const SearchScreen(),
-    // PatientProfileScreen(),
+    const SearchScreen(),
+    const MyAppointmentsScreen(),
     // PatientProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[0],
+      body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
         decoration: BoxDecoration(

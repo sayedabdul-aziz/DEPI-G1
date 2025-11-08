@@ -16,6 +16,7 @@ import 'package:se7ety/features/auth/data/models/doctor_model.dart';
 // - sorted documents => collection.orderBy('field', descending: true/false).get()
 // - paginated documents => collection.limit(n).get()
 // - combined queries => collection.where(...).orderBy(...).limit(n).get()
+// >> //TODO: you need to create indexe !!
 
 //! set
 // create document => collection.doc(id/null).set(data)
