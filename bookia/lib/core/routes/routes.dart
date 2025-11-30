@@ -1,3 +1,4 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/page/login_screen.dart';
 import 'package:bookia/features/auth/presentation/page/register_screen.dart';
@@ -29,20 +30,19 @@ class Routes {
     routes: [
       GoRoute(path: splash, builder: (context, state) => SplashScreen()),
       GoRoute(path: welcome, builder: (context, state) => WelcomeScreen()),
-      GoRoute(
-        path: login,
-        builder: (context, state) => BlocProvider(
-          create: (context) => AuthCubit(),
-          child: LoginScreen(),
-        ),
+      ShellRoute(
+        builder: (context, state, child) {
+          return BlocProvider.value(value: gi<AuthCubit>(), child: child);
+        },
+        routes: [
+          GoRoute(path: login, builder: (context, state) => LoginScreen()),
+          GoRoute(
+            path: register,
+            builder: (context, state) => RegisterScreen(),
+          ),
+        ],
       ),
-      GoRoute(
-        path: register,
-        builder: (context, state) => BlocProvider(
-          create: (context) => AuthCubit(),
-          child: RegisterScreen(),
-        ),
-      ),
+
       GoRoute(
         path: main,
         builder: (context, state) {

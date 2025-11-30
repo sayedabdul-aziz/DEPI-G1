@@ -1,6 +1,5 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/core/routes/routes.dart';
-import 'package:bookia/core/services/api/dio_provider.dart';
-import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/utils/app_fonts.dart';
 import 'package:bookia/core/utils/text_styles.dart';
@@ -15,8 +14,7 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  DioProvider.init();
-  await SharedPref.init();
+  await setupServiceLocator();
   runApp(const MainApp());
 }
 

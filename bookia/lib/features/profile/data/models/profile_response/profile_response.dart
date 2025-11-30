@@ -1,4 +1,4 @@
-import 'package:bookia/features/auth/data/models/auth_response/user.dart';
+import 'package:bookia/features/auth/domain/entities/auth_response/user.dart';
 
 class ProfileResponse {
   User? data;

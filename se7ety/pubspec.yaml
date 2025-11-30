@@ -1,7 +1,7 @@
 name: se7ety
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.2
 
 environment:
   sdk: ^3.9.2
@@ -10,9 +10,11 @@ dependencies:
   cloud_firestore: ^6.0.3
   firebase_auth: ^6.1.1
   firebase_core: ^4.2.0
+  firebase_messaging: ^16.0.4
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_local_notifications: ^19.5.0
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.2.1
