@@ -1,5 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:se7ety/core/helper/extensions.dart';
+import 'package:se7ety/core/presentation/cubit/theme_cubit.dart';
 import 'package:se7ety/core/routes/navigations.dart';
 import 'package:se7ety/core/routes/routes.dart';
 import 'package:se7ety/core/utils/app_colors.dart';
@@ -23,21 +27,60 @@ class WelcomeScreen extends StatelessWidget {
           PositionedDirectional(
             top: 100,
             start: 25,
+            end: 25,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // language card for change localization
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        context.setLocale(
+                          context.isArabic ? Locale('en') : Locale('ar'),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: context.theme.cardColor,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: AppColors.primaryColor),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.language, color: AppColors.primaryColor),
+                            const Gap(5),
+                            Text("language".tr()),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    // button for theme
+                    IconButton(
+                      onPressed: () {
+                        context.read<ThemeCubit>().changeTheme();
+                      },
+                      icon: Icon(
+                        context.read<ThemeCubit>().isDark
+                            ? Icons.light_mode_outlined
+                            : Icons.dark_mode_outlined,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(15),
                 Text(
-                  'اهلا بيك',
+                  "welcome".tr(args: ["Se7ety"]),
                   style: TextStyles.title.copyWith(
                     fontSize: 38,
                     color: AppColors.primaryColor,
                   ),
                 ),
                 const Gap(15),
-                Text(
-                  'سجل واحجز عند دكتورك وانت فالبيت',
-                  style: TextStyles.body,
-                ),
+                Text("sign_and_book".tr(), style: TextStyles.body),
               ],
             ),
           ),
@@ -61,21 +104,21 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'سجل دلوقتي كــ',
+                    "sign_as".tr(),
                     style: TextStyles.title.copyWith(
                       color: AppColors.whiteColor,
                     ),
                   ),
                   const SizedBox(height: 40),
                   _buildUserButton(
-                    title: 'دكتور',
+                    title: "doctor".tr(),
                     onTap: () {
                       pushTo(context, Routes.login, extra: UserTypeEnum.doctor);
                     },
                   ),
                   const SizedBox(height: 15),
                   _buildUserButton(
-                    title: 'مريض',
+                    title: "patient".tr(),
                     onTap: () {
                       pushTo(
                         context,

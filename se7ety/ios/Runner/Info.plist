@@ -30,6 +30,11 @@
 	<string>user can upload profile image</string>
 	<key>NSCameraUsageDescription</key>
 	<string>user can upload profile image</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>ar</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>

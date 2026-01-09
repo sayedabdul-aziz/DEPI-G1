@@ -6,6 +6,7 @@ class SharedPref {
   static late SharedPreferences _pref;
 
   static const konBoarding = "onBoarding";
+  static const kIsDark = "isDark";
 
   static init() async {
     _pref = await SharedPreferences.getInstance();
@@ -17,6 +18,14 @@ class SharedPref {
 
   static bool isOnBoardingShown() {
     return _pref.getBool(konBoarding) ?? false;
+  }
+
+  static setIsDark(bool value) {
+    setData(kIsDark, value);
+  }
+
+  static bool isDark() {
+    return _pref.getBool(kIsDark) ?? false;
   }
 
   static setData(String key, dynamic value) {

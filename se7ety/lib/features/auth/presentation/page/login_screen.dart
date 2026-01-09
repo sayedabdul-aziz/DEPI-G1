@@ -33,10 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var cubit = context.read<AuthCubit>();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.whiteColor,
-        leading: const BackButton(color: AppColors.primaryColor),
-      ),
+      appBar: AppBar(leading: const BackButton(color: AppColors.primaryColor)),
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthLoadingState) {
@@ -118,12 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'ليس لدي حساب ؟',
-                          style: TextStyles.body.copyWith(
-                            color: AppColors.darkColor,
-                          ),
-                        ),
+                        Text('ليس لدي حساب ؟', style: TextStyles.body),
                         TextButton(
                           onPressed: () {
                             pushWithReplacement(

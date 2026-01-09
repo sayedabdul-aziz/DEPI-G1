@@ -9,7 +9,7 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.whiteColor,
     appBarTheme: AppBarTheme(
       centerTitle: true,
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: AppColors.whiteColor,
       surfaceTintColor: Colors.transparent,
       titleTextStyle: TextStyle(
         color: AppColors.whiteColor,
@@ -18,6 +18,7 @@ class AppThemes {
         fontFamily: AppFonts.cairoFamily,
       ),
     ),
+    cardColor: AppColors.accentColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.primaryColor,
       onSurface: AppColors.darkColor,
@@ -30,6 +31,56 @@ class AppThemes {
     ),
     inputDecorationTheme: InputDecorationTheme(
       fillColor: AppColors.accentColor,
+      filled: true,
+      prefixIconColor: AppColors.primaryColor,
+      suffixIconColor: AppColors.primaryColor,
+      hintStyle: TextStyles.body.copyWith(color: AppColors.greyColor),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide.none,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide.none,
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide.none,
+      ),
+    ),
+  );
+
+  static ThemeData get darkTheme => ThemeData(
+    fontFamily: AppFonts.cairoFamily,
+    scaffoldBackgroundColor: AppColors.darkColor,
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      backgroundColor: AppColors.darkColor,
+      surfaceTintColor: Colors.transparent,
+      titleTextStyle: TextStyle(
+        color: AppColors.whiteColor,
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        fontFamily: AppFonts.cairoFamily,
+      ),
+    ),
+    cardColor: AppColors.darkColor,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.primaryColor,
+      onSurface: AppColors.whiteColor,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      backgroundColor: AppColors.darkColor,
+      type: BottomNavigationBarType.fixed,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: AppColors.greyColor.withValues(alpha: .1),
       filled: true,
       prefixIconColor: AppColors.primaryColor,
       suffixIconColor: AppColors.primaryColor,
